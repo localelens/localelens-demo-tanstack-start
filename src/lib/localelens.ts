@@ -1,5 +1,9 @@
 import { createServerFn } from '@tanstack/react-start'
-import { getCookie, setCookie, getRequestHeader } from '@tanstack/react-start/server'
+import {
+  getCookie,
+  getRequestHeader,
+  setCookie,
+} from '@tanstack/react-start/server'
 
 export type Translations = Record<string, string>
 
@@ -25,14 +29,17 @@ export const detectLocale = createServerFn({ method: 'GET' }).handler(
     // 2. Parse Accept-Language header
     const acceptLanguage = getRequestHeader('accept-language')
     if (acceptLanguage) {
-      const preferred = acceptLanguage.split(',')[0]?.split('-')[0]?.toLowerCase()
+      const preferred = acceptLanguage
+        .split(',')[0]
+        ?.split('-')[0]
+        ?.toLowerCase()
       if (preferred && LOCALES.includes(preferred as LocaleCode)) {
         return preferred as LocaleCode
       }
     }
 
     return DEFAULT_LOCALE
-  }
+  },
 )
 
 /**
@@ -48,7 +55,7 @@ export const setLocaleCookie = createServerFn({ method: 'POST' }).handler(
       sameSite: 'lax',
     })
     return { ok: true }
-  }
+  },
 )
 
 /**
@@ -63,7 +70,9 @@ export const getTranslations = createServerFn({ method: 'GET' }).handler(
     const apiKey = process.env.LOCALELENS_API_KEY
 
     if (!projectId || !apiKey) {
-      console.warn('LocaleLens: Missing LOCALELENS_PROJECT_ID or LOCALELENS_API_KEY')
+      console.warn(
+        'LocaleLens: Missing LOCALELENS_PROJECT_ID or LOCALELENS_API_KEY',
+      )
       return {}
     }
 
@@ -76,12 +85,14 @@ export const getTranslations = createServerFn({ method: 'GET' }).handler(
     })
 
     if (!res.ok) {
-      console.error(`LocaleLens: Failed to fetch translations for "${locale}": ${res.status}`)
+      console.error(
+        `LocaleLens: Failed to fetch translations for "${locale}": ${res.status}`,
+      )
       return {}
     }
 
     return res.json()
-  }
+  },
 )
 
 /**

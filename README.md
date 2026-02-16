@@ -76,9 +76,9 @@ src/
 
 ## Routes
 
-| Route | Type | Description |
-|-------|------|-------------|
-| `/` | Public | Landing page with translations |
+| Route        | Type      | Description                              |
+| ------------ | --------- | ---------------------------------------- |
+| `/`          | Public    | Landing page with translations           |
 | `/dashboard` | Protected | Requires authentication, same i18n setup |
 
 ## Setup
@@ -153,6 +153,7 @@ This repository includes `docs/localelens-demo-translations.json`, which can be 
 This file exists **only to make the demo easy to reproduce**.
 
 In a real application:
+
 - Translation keys usually originate from your codebase
 - Translations are managed in LocaleLens
 - This file is **not** kept in sync or checked into production repos

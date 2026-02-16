@@ -1,12 +1,8 @@
-import { createContext, useContext, useState, useCallback } from 'react'
-import type { ReactNode } from 'react'
+import { createContext, useCallback, useContext, useState } from 'react'
 import { useRouter } from '@tanstack/react-router'
-import {
-  type Translations,
-  type LocaleCode,
-  LOCALES,
-  setLocaleCookie,
-} from './localelens'
+import { LOCALES, setLocaleCookie } from './localelens'
+import type { LocaleCode, Translations } from './localelens'
+import type { ReactNode } from 'react'
 
 export { LOCALES, type LocaleCode }
 
@@ -38,24 +34,27 @@ export function I18nProvider({
   const [locale, setLocaleState] = useState<LocaleCode>(initialLocale)
   const [isChanging, setIsChanging] = useState(false)
 
-  const setLocale = useCallback(async (newLocale: LocaleCode) => {
-    if (newLocale === locale) return
+  const setLocale = useCallback(
+    async (newLocale: LocaleCode) => {
+      if (newLocale === locale) return
 
-    setIsChanging(true)
-    setLocaleState(newLocale)
+      setIsChanging(true)
+      setLocaleState(newLocale)
 
-    // Persist preference to cookie via server function
-    await setLocaleCookie({ data: newLocale })
+      // Persist preference to cookie via server function
+      await setLocaleCookie({ data: newLocale })
 
-    // Invalidate router to trigger loader re-fetch with new locale
-    await router.invalidate()
+      // Invalidate router to trigger loader re-fetch with new locale
+      await router.invalidate()
 
-    setIsChanging(false)
-  }, [locale, router])
+      setIsChanging(false)
+    },
+    [locale, router],
+  )
 
   const t = useCallback(
     (key: string): string => translations[key] ?? key,
-    [translations]
+    [translations],
   )
 
   return (

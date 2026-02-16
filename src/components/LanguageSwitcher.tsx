@@ -1,5 +1,5 @@
-import { useI18n, LOCALES } from '../lib/i18n'
 import { Globe } from 'lucide-react'
+import { LOCALES, useI18n } from '../lib/i18n'
 
 const LOCALE_LABELS: Record<string, string> = {
   en: 'English',

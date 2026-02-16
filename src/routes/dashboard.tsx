@@ -1,7 +1,7 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { Shield, LogOut } from 'lucide-react'
+import { LogOut, Shield } from 'lucide-react'
 import { useTranslation } from '../lib/i18n'
-import { requireAuth, logout } from '../lib/auth'
+import { logout, requireAuth } from '../lib/auth'
 
 export const Route = createFileRoute('/dashboard')({
   // Protected: redirect to home if not authenticated
@@ -40,18 +40,24 @@ function Dashboard() {
         </div>
 
         <div className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-xl p-8">
-          <p className="text-gray-300 mb-6">
-            {t('dashboard.description')}
-          </p>
+          <p className="text-gray-300 mb-6">{t('dashboard.description')}</p>
 
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm">
-              <span className="text-gray-400">{t('dashboard.auth_status')}:</span>
-              <span className="text-green-400 font-medium">{t('dashboard.authenticated')}</span>
+              <span className="text-gray-400">
+                {t('dashboard.auth_status')}:
+              </span>
+              <span className="text-green-400 font-medium">
+                {t('dashboard.authenticated')}
+              </span>
             </div>
             <div className="flex items-center gap-3 text-sm">
-              <span className="text-gray-400">{t('dashboard.translations_loaded')}:</span>
-              <span className="text-cyan-400 font-medium">{t('dashboard.via_ssr')}</span>
+              <span className="text-gray-400">
+                {t('dashboard.translations_loaded')}:
+              </span>
+              <span className="text-cyan-400 font-medium">
+                {t('dashboard.via_ssr')}
+              </span>
             </div>
           </div>
         </div>

@@ -1,5 +1,9 @@
 import { createServerFn } from '@tanstack/react-start'
-import { getCookie, setCookie, deleteCookie } from '@tanstack/react-start/server'
+import {
+  deleteCookie,
+  getCookie,
+  setCookie,
+} from '@tanstack/react-start/server'
 import { redirect } from '@tanstack/react-router'
 
 const AUTH_COOKIE = 'demo_auth'
